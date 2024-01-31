@@ -8,4 +8,8 @@ class Piece
         @board = board
         @pos = pos
     end
+
+    def moves
+        
+    end
 end 
