@@ -1,11 +1,11 @@
 
 require_relative "piece.rb"
-require_relative "slidable"
+require_relative "slideable"
 
-class bishop < Piece 
-    include Sliable 
+class Bishop < Piece 
+    include Slideable 
     def symbol
-    color == :black ? #symbol : #lightcolor
+        color == :black ? '♝' : '♗'
     end 
 
     # In the bishop class, use this method definition 
@@ -15,3 +15,7 @@ class bishop < Piece
     end
 end
 
+b = Bishop.new(:white, [0,2], 'fake_board')
+p b.move_dirs
+# puts and print both call #to_s
+# p calls #inspect

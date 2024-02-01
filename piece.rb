@@ -9,7 +9,24 @@ class Piece
         @pos = pos
     end
 
-    def moves
-        
-    end
+    def to_s
+        symbol
+      end
+    
+      def empty?
+        false
+      end
+    
+      def valid_moves
+    
+      end
+    
+      def pos=(val)
+    
+      end
+    
+      def symbol
+        # " "
+      end
+
 end 

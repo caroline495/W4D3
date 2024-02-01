@@ -24,26 +24,56 @@ module Slideable
         raise NotImplementedError.new
     end 
 
+    def color  
+        raise NotImplementedError.new
+    end 
+
     def board
         raise NotImplementedError.new 
     end
 
+    def move_dirs 
+        # this only runs if the base class does not overwrite move_dirs 
+        raise "base Class must implement move_dirs"
+        # could do "raise NotImplementedError" too - to let user know they need to have that method already
+    end 
+
     private
-    def grow_unblocked_moves_in_dir(dir)
+
+    def grow_unblocked_moves_in_dir(dir) # [1,1]
         # all of this will be in a loop, until you meet the 3 end conditions 
         res = []
-        r, c = self.pos 
-        dr, dc = dir # d for delta, change in row, change in column
-        new_position = [r + dr, c + dc] # generate potential new position 
-        # return current res if new_pos is off the board
-        # return current res if there is a piece of same color at new_pos
-        # add new_pos and return if there is a piece of opposite color at new_pos 
+        r, c = self.pos # [0,0]
+        dr, dc = dir # d for delta, change in row, change in column, [1,1]
+        new_position = [r + dr, c + dc] # generate potential new position  # [1,1] 
+
+        while board[new_position].empty?
+            # new_position = [7,7]
+            # res [ x, y, h, g, i,]
+            # return current res if new_pos is off the board
+            if new_position[0] > 7 || new_position[0] < 0 && new_position[1] > 7 || new_position[1] < 0
+                return res
+            end
+
+            # return current res if there is a piece of same color at new_pos
+            if board[new_position].color == self.color 
+                return res 
+            end 
+
+            # add new_pos and return if there is a piece of opposite color at new_pos 
+            if board[new_position].color != self.color 
+                res << new_position
+                return res 
+            end
+            # res [ x, y, h, g, i, [7,7]] 
+            # generate [new_pos] 
+
+            res << new_position
+            
+        end
         # add new_pos to res and continue looping if new_pos is empty 
+        
+
+
     end
 end
-
-def move_dirs 
-    # this only runs if the base class does not overwrite move_dirs 
-    raise "base Class must implement move_dirs"
-    # could do "raise NotImplementedError" too - to let user know they need to have that method already
-end 

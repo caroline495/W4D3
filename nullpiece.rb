@@ -1,7 +1,7 @@
 require_relative "piece"
-require "Singleton"
+require "singleton"
 
-class NullPiece < NullPiece
+class NullPiece < Piece
     include Singleton
     def initialize
     end
@@ -9,7 +9,11 @@ class NullPiece < NullPiece
     def empty?
         true 
     end
+
     def moves
         []
     end
 end
+
+p NullPiece.instance
+p NullPiece.instance
